@@ -1,4 +1,4 @@
 var map = jsboard.board({
   attach: "game",
-  size: "12x12"
+  size: "8x8"
 });

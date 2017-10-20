@@ -11,4 +11,8 @@ function Piece(slug, representationText) {
 
 Piece.prototype.clone = function () {
   return this.template.clone();
-}
+};
+
+Piece.prototype.valid_moves = function (map, coordinate) {
+  console.log('moves tbd');
+};
