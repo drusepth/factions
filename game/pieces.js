@@ -1,14 +1,11 @@
 var PIECES = {};
 
+function createPiece(slug, representationText) {
+  PIECES[slug] = new Piece(slug, representationText);
+}
+
 requirejs(['game/models/piece'], function(util) {
-  PIECES['x'] = jsboard.piece({
-    text: "X",
-    fontSize: "40px",
-    textAlign: "center"
-  });
-  PIECES['o'] = jsboard.piece({
-    text: "O",
-    fontSize: "40px",
-    textAlign: "center"
-  });
+  createPiece('soldier', 'S');
+  createPiece('wizard',  'W');
+  createPiece('rogue',   'R');
 });
