@@ -1,4 +1,4 @@
-var hand = jsboard.board({
-  attach: "hand",
-  size: "1x8"
+var HAND = {};
+requirejs(['game/models/hand'], function (util) {
+  HAND[CURRENT_PLAYER] = new Hand(8);
 });
