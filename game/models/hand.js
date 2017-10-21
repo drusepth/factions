@@ -5,8 +5,29 @@ function Hand (maxHandSize) {
   this.slots = jsboard.board({
     attach: this.boundElementId,
     size:   "1x" + this.maxHandSize
-  })
+  });
+
+  this.slots.cell("each").on("click", function() {
+    var my_hand = HAND[CURRENT_PLAYER];
+
+    if (my_hand.visual().cell(this).get() !== null) {
+      my_hand.resetSelection();
+      my_hand.selectPiece(this);
+    }
+  });
 }
+
+Hand.prototype.resetSelection = function () {
+  this.visual().cell("each").style({
+    background: 'lightgrey'
+  });
+};
+
+Hand.prototype.selectPiece = function (piece) {
+  this.visual().cell(piece).style({
+    background: "gold",
+  });
+};
 
 Hand.prototype.actualHandSize = function () {
   for (var i = 0; i < this.maxHandSize; i++) {

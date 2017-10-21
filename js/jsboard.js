@@ -294,6 +294,8 @@ window.jsboard = (function(){
                     if (!props.attach) { console.log("Need attachment for game board"); }
                     else {
                         var s = props[el].split("x");
+                        var attachedBoard = document.getElementById(props.attach);
+
                         size.push(parseInt(s[0]),parseInt(s[1]));
                         // create table data to represent game board in DOM
                         for (var i=0; i<size[0]; i++) {
@@ -305,21 +307,22 @@ window.jsboard = (function(){
                                 t.dataset.matrixval = i+"x"+k;
                                 a.appendChild(t);
                             }
-                            document.getElementById(props.attach).appendChild(a);
+                            attachedBoard.appendChild(a);
                         }
+
                         // style default game board
-                        document.getElementById(props.attach).style.borderSpacing  = "2px";
-                        for (var i=0; i<document.getElementsByTagName("td").length; i++) {
-                            document.getElementsByTagName("td")[i].style.background = "lightgray";
-                            document.getElementsByTagName("td")[i].style.width = "50px";
-                            document.getElementsByTagName("td")[i].style.height = "50px";
+                        attachedBoard.style.borderSpacing  = "2px";
+                        for (var i=0; i<attachedBoard.getElementsByTagName("td").length; i++) {
+                            attachedBoard.getElementsByTagName("td")[i].style.background = "lightgray";
+                            attachedBoard.getElementsByTagName("td")[i].style.width = "50px";
+                            attachedBoard.getElementsByTagName("td")[i].style.height = "50px";
                         }
                         // create checkerboard pattern
                         if (props.style && props.style=="checkerboard") {
                             var colour = "gray";
                             if (props.stylePattern) {
-                                for (var i=0; i<document.getElementsByTagName("td").length; i++) {
-                                    document.getElementsByTagName("td")[i].style.background = props.stylePattern[0];
+                                for (var i=0; i<attachedBoard.getElementsByTagName("td").length; i++) {
+                                    attachedBoard.getElementsByTagName("td")[i].style.background = props.stylePattern[0];
                                 }
                                 colour = props.stylePattern[1];
                             }
@@ -328,7 +331,7 @@ window.jsboard = (function(){
                                 else var skipCol = false;
                                 for (var c=0; c<size[1]; c++) {
                                     if (skipCol)
-                                        document.getElementsByClassName("boardRow_"+r)[0].childNodes[c].style.background = colour;
+                                        attachedBoard.getElementsByClassName("boardRow_"+r)[0].childNodes[c].style.background = colour;
                                     skipCol = !skipCol;
                                 }
                             }
@@ -336,7 +339,7 @@ window.jsboard = (function(){
                     }
                 }
             }
-            return Board(document.getElementById(props.attach),size,props.attach);
+            return Board(attachedBoard,size,props.attach);
         },
 
         // create new game piece
