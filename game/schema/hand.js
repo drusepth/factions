@@ -8,7 +8,7 @@ function Hand (maxHandSize) {
   });
 
   this.slots.cell("each").on("click", function() {
-    var my_hand = HAND[CURRENT_PLAYER];
+    var my_hand = GAME.my_hand;
 
     if (my_hand.visual().cell(this).get() !== null) {
       my_hand.resetSelection();
@@ -31,8 +31,8 @@ Hand.prototype.selectPiece = function (piece) {
 
 Hand.prototype.actualHandSize = function () {
   for (var i = 0; i < this.maxHandSize; i++) {
-    console.log(HAND[CURRENT_PLAYER].slots.cell([0, i]).get());
-    if (HAND[CURRENT_PLAYER].slots.cell([0, i]).get() === null) {
+    console.log(GAME.my_hand.slots.cell([0, i]).get());
+    if (GAME.my_hand.slots.cell([0, i]).get() === null) {
       return i;
     }
   }
