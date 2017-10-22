@@ -21,18 +21,28 @@ Hand.prototype.resetSelection = function () {
   this.visual().cell("each").style({
     background: 'lightgrey'
   });
+  //...........todo.....this.visual().cell("each").DOM().classList.remove('selected');
 };
 
 Hand.prototype.selectPiece = function (piece) {
   this.visual().cell(piece).style({
     background: "gold",
   });
+  this.visual().cell(piece).DOM().classList.add('selected');
+};
+
+Hand.prototype.selectedPiece = function () {
+  for (var i = 0; i < this.maxHandSize; i++) {
+    if (this.visual().cell([0, i]).DOM().classList.contains('selected')) {
+      return i;
+    }
+  }
+  return null;
 };
 
 Hand.prototype.actualHandSize = function () {
   for (var i = 0; i < this.maxHandSize; i++) {
-    console.log(GAME.my_hand.slots.cell([0, i]).get());
-    if (GAME.my_hand.slots.cell([0, i]).get() === null) {
+    if (this.visual().cell([0, i]).get() === null) {
       return i;
     }
   }
